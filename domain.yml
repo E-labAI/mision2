@@ -1,0 +1,80 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - availability_user_query
+  - pricing_user_query
+  - booking_user_query
+  - location_user_query
+  - loging_user_query
+  - modification_user_query
+  - cancellation_user_query
+  - payment_user_query
+  - amenities_user_query
+
+actions:
+  - action_check_availability
+  - action_provide_pricing
+  - action_handle_booking
+  - action_provide_location
+  - action_handle_modification
+  - action_handle_cancellation
+  - action_provide_payment_info
+  - action_list_amenities
+  - action_provide_check_in_out_info
+
+responses:
+  utter_greet:
+  - text: "¡Hola!, Bienvenido a Ecos de la Montaña ¿Cómo estás?"
+
+  utter_cheer_up:
+  - text: "Animate tomando un descanso en Ecos de la Montaña"
+
+  utter_did_that_help:
+  - text: "¿Te ayuda?"
+
+  utter_happy:
+  - text: "¡Genial, continúa!"
+
+  utter_goodbye:
+  - text: "Adiós"
+
+  utter_iamabot:
+  - text: "Soy un bot, impulsado por Rasa."
+
+  utter_availability_user_query:
+  - text: "Si, hay disponibilidad!."
+
+  utter_pricing_user_query:
+  - text: "Ecos de la Montaña tiene 3 modalidades de alojamiento y el costo es por noche. Tenemos el apartamento para 10 personas tiene un costo de $700.000, las habitaciones para 3 personas vale $200.000 y, el micro-apartamento cuesta $250.000 y es para 2 personas."
+
+  utter_booking_user_query:
+  - text: "¡Claro!, será un gusto atenderte, indicacme por favor las fechas y la modalidad de alojamiento que deseas."
+
+  utter_location_user_query:
+  - text: "Ecos de la Montaña, es un hospedaje campetre, ubicado en el Km 24 vía Rionegro-Playon, Santander. Estamos dentro de un balneario denominado el Portal y el acceso es por la vía principal, ingresas al balneareo y allí a unos 3 km por vía destapada se encuentra la cabaña."
+
+  utter_loging_user_query:
+  - text: "El ingreso es a las 14:00 pm y la salída es antes del medio día."
+
+  utter_modification_user_query:
+  - text: "Para modificar tu reserva, indicanos el número de contacto, el motivo y la nueva fecha de llegada. Pronto alguien de nuestro equipo se contactará contigo."
+
+  utter_cancellation_user_query:
+  - text: "Es una lástima que tengas que cancelar la reserva, indicanos el número de contacto, el motivo y la nueva fecha de llegada. Pronto alguien de nuestro equipo se contactará contigo."
+
+  utter_payment_user_query:
+  - text: "Por favor deposita el total del hospedaje en la cuenta de ahorros número 0000000 de Bancolombia y adjunta el comprobante en este chat."
+
+  utter_amenities_user_query:
+  - text: "Con el hospedaje proporcionamos los linos para uso en nuestras instalaciones y Wifi. Contamos con hidropiscina con tratamiento salino, sauna, zona de recreación y kiosco con cocina, exclusivos para nuestros huéspedes. Además, puedes pasar por las zonas verdes y visitar los pozos naturales de la quebrada Samacá, aledaños a la cabaña."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

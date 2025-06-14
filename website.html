@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecos de la Montaña</title>
+    <!-- Favicon (logo en la pestaña) -->
+    <link rel="icon" href="images/logo/logo.png" type="images/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      header {
+        position: relative;
+        height: 70vh;
+        overflow: hidden;
+      }
+
+      header video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      header .overlay {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.4);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      header h1 {
+        font-size: 3rem;
+        text-shadow: 2px 2px 6px #000;
+      }
+
+      nav {
+        background-color: #25380bad;
+        padding: 1rem;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      nav a {
+        color: white;
+        margin: 0 1rem;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.1rem;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: #a5d6a7;
+      }
+
+      .content {
+        padding: 3rem 2rem;
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .content h2 {
+        color: #25380bad;
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+      }
+
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .feature {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 1000px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+      }
+
+      .feature-content {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+
+      .feature-images {
+        width: 50%;
+        position: relative;
+      }
+
+      .feature-text {
+        width: 50%;
+        padding: 2rem;
+      }
+
+      .feature h3 {
+        color: #25380bad;
+        font-size: 1.8rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      .feature p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
+
+      /* Carrusel de imágenes */
+      .carousel {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+      }
+
+      .carousel-inner {
+        display: flex;
+        transition: transform 0.5s ease;
+        height: 100%;
+      }
+
+      .carousel-item {
+        min-width: 100%;
+        height: 100%;
+      }
+
+      .carousel-item img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Cambiado de 'cover' a 'contain' */
+      }
+
+      .carousel-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .carousel-control.prev {
+        left: 10px;
+      }
+
+      .carousel-control.next {
+        right: 10px;
+      }
+
+      footer {
+        background-color: #25380bad;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 3rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .feature-content {
+          flex-direction: column;
+        }
+        
+        .feature-images, .feature-text {
+          width: 100%;
+        }
+        
+        header h1 {
+          font-size: 2rem;
+        }
+        
+        .content h2 {
+          font-size: 1.8rem;
+        }
+        
+        .carousel {
+          height: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Chatbot Widget -->
+    <rasa-chatbot-widget 
+      server-url="http://localhost:5005"
+      socket-path="/socket.io/"
+      initial-payload="/greet"
+      socket-connection-timeout="5000"
+      embedded="true"
+      title="Asistente de Ecos de la Montaña"
+      subtitle="¿En qué podemos ayudarte hoy?"
+      input-text-placeholder="Escribe tu mensaje aquí..."
+      params="storage=session"
+      greeting-message="¡Hola! Soy el asistente de Ecos de la Montaña. ¿Cómo puedo ayudarte?"
+    ></rasa-chatbot-widget>
+
+    <header>
+      <!-- Video con sonido habilitado (removido el atributo muted) -->
+      <video autoplay loop>
+        <source src="videos/ecos.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+      </video>
+      <div class="overlay">
+        <h1></h1>
+      </div>
+    </header>
+ 
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#">Reservas</a>
+      <a href="#">Contacto</a>
+    </nav>
+ 
+    <section class="content">
+      <h2>Bienvenidos a Ecos de la Montaña</h2>
+      <p>Rodeado de paisajes montañosos, aire puro y tranquilidad, nuestro hospedaje campestre te ofrece la combinación perfecta entre descanso y aventura.</p>
+ 
+      <div class="features">
+        <!-- Apartamento - 6 fotos -->
+        <div class="feature">
+          <div class="feature-content">
+            <div class="feature-images">
+              <div class="carousel" id="carousel1">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="images/aptos/1.jpg" alt="Arcoíris1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/aptos/2.jpg" alt="Arcoíris2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/aptos/3.jpg" alt="Arcoíris3">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/aptos/4.jpg" alt="Roble1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/aptos/5.jpg" alt="Roble2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/aptos/6.jpg" alt="Roble3">
+                  </div>
+                </div>
+                <button class="carousel-control prev" onclick="prevSlide('carousel1')">&#10094;</button>
+                <button class="carousel-control next" onclick="nextSlide('carousel1')">&#10095;</button>
+              </div>
+            </div>
+            <div class="feature-text">
+              <h3>Apartamento</h3>
+              <p>Nuestros amplios apartamentos ofrecen todo el confort que necesitas para una estancia relajante. Cada unidad cuenta con:</p>
+              <ul>
+                <li>Amplio espacio</li>
+                <li>Cocina completamente equipada</li>
+                <li>Sala de estar y altillo</li>
+                <li>Balcón con vista a las montañas</li>
+                <li>Capacidad para 10 personas</li>
+                <li>WiFi de alta velocidad</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Micro-apartamento - 3 fotos -->
+        <div class="feature">
+          <div class="feature-content">
+            <div class="feature-images">
+              <div class="carousel" id="carousel2">
+                <div class="carousel-inner">
+                  <div class="carousel-item">
+                    <img src="images/microapto/├── 1.jpg" alt="Manantial">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/microapto/├── 2.jpg" alt="Manantial">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/microapto/├── 3.jpg" alt="Manantial">
+                  </div>
+                </div>
+                <button class="carousel-control prev" onclick="prevSlide('carousel2')">&#10094;</button>
+                <button class="carousel-control next" onclick="nextSlide('carousel2')">&#10095;</button>
+              </div>
+            </div>
+            <div class="feature-text">
+              <h3>Micro-apartamento</h3>
+              <p>Perfecto para parejas o viajeros individuales que buscan comodidad en un espacio eficiente. Características:</p>
+              <ul>
+                <li>Espacio bien distribuido</li>
+                <li>Cocina compacta con lo esencial</li>
+                <li>Área de descanso integrada</li>
+                <li>Cama doble y sofacama marshall</li>
+                <li>Ventana con vista al jardín</li>
+                <li>Televisión inteligente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Habitación - 4 fotos -->
+        <div class="feature">
+          <div class="feature-content">
+            <div class="feature-images">
+              <div class="carousel" id="carousel3">
+                <div class="carousel-inner">
+                  <div class="carousel-item">
+                    <img src="images/rooms/├── 1.jpg" alt="Melodía">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/rooms/├── 2.jpg" alt="Melodía">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/rooms/├── 3.jpg" alt="Susurro">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/rooms/├── 4.jpg" alt="Susurro">
+                  </div>
+                </div>
+                <button class="carousel-control prev" onclick="prevSlide('carousel3')">&#10094;</button>
+                <button class="carousel-control next" onclick="nextSlide('carousel3')">&#10095;</button>
+              </div>
+            </div>
+            <div class="feature-text">
+              <h3>Habitación</h3>
+              <p>Nuestras acogedoras habitaciones son ideales para quienes buscan un refugio sencillo pero con todas las comodidades:</p>
+              <ul>
+                <li>Amplias habitaciones</li>
+                <li>Cama doble y cama sencilla</li>
+                <li>Baño privado</li>
+                <li>Televisor inteligente</li>
+                <li>Vista parcial a las montañas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <footer>
+       <p>&copy; 2025 Ecos Hospedaje Km 24 vía Rionegro-Playón, Santander - Todos los derechos reservados</p>
+  <p>
+    <a href="https://wa.me/573188068331" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: none;">
+      <i class="fab fa-whatsapp" style="margin-right: 5px;"></i> WhatsApp: +57 3188068331
+    </a> 
+    | Email: ecos.hospedaje@gmail.com
+  </p>
+    </footer>
+
+    <script>
+      // Inicializar carruseles
+      document.querySelectorAll('.carousel').forEach(carousel => {
+        const inner = carousel.querySelector('.carousel-inner');
+        const items = inner.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+        
+        // Configurar el ancho del inner basado en el número de items
+        inner.style.width = `${items.length * 100}%`;
+
+        // Configurar el ancho de cada item
+        items.forEach(item => {
+          item.style.width = `${100 / totalItems}%`;
+        });
+        
+        // Actualizar la posición del carrusel
+        const updateCarousel = () => {
+          inner.style.transform = `translateX(-${currentIndex * (100 / items.length)}%)`;
+        };
+        
+        // Actualizar clases active
+          items.forEach((item, index) => {
+            item.classList.toggle('active', index === currentIndex);
+          });
+       // };
+
+        // Guardar la función para este carrusel específico
+        carousel.nextSlide = () => {
+          currentIndex = (currentIndex + 1) % items.length;
+          updateCarousel();
+        };
+        
+        carousel.prevSlide = () => {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          updateCarousel();
+        };
+        
+        // Iniciar rotación automática
+        setInterval(() => {
+          carousel.nextSlide();
+        }, 5000);
+      });
+
+      // Pausar el carrusel cuando el mouse está sobre él
+        carousel.addEventListener('mouseenter', () => {
+          clearInterval(intervalId);
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+          intervalId = setInterval(() => {
+            carousel.nextSlide();
+          }, 5000);
+        });
+        
+        // Inicializar
+        updateCarousel();
+      //});
+
+      // Funciones globales para los botones
+      function nextSlide(carouselId) {
+        const carousel = document.getElementById(carouselId);
+        if (carousel && carousel.nextSlide) {
+          carousel.nextSlide();
+        }
+      }
+
+      function prevSlide(carouselId) {
+        const carousel = document.getElementById(carouselId);
+        if (carousel && carousel.prevSlide) {
+          carousel.prevSlide();
+        }
+      }
+    </script>
+
+    <!-- Script del chatbot -->
+    <script
+      type="module"
+      src="https://unpkg.com/@rasahq/chat-widget-ui/dist/rasa-chatwidget/rasa-chatwidget.esm.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@rasahq/chat-widget-ui/dist/rasa-chatwidget/rasa-chatwidget.css"
+    />
+  </body>
+</html>

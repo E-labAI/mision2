@@ -1,0 +1,58 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Respond to bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Respond to availability query
+  steps:
+  - intent: availability_user_query
+  - action: utter_availability_user_query
+
+- rule: Respond to pricing query
+  steps:
+  - intent: pricing_user_query
+  - action: utter_pricing_user_query
+
+- rule: Respond to booking query
+  steps:
+  - intent: booking_user_query
+  - action: utter_booking_user_query
+
+- rule: Respond to location query
+  steps:
+  - intent: location_user_query
+  - action: utter_location_user_query
+
+- rule: Respond to check-in/out times query
+  steps:
+  - intent: loging_user_query
+  - action: utter_loging_user_query
+
+- rule: Respond to modification request
+  steps:
+  - intent: modification_user_query
+  - action: utter_modification_user_query
+
+- rule: Respond to cancellation request
+  steps:
+  - intent: cancellation_user_query
+  - action: utter_cancellation_user_query
+
+- rule: Respond to payment query
+  steps:
+  - intent: payment_user_query
+  - action: utter_payment_user_query
+
+- rule: Respond to amenities query
+  steps:
+  - intent: amenities_user_query
+  - action: utter_amenities_user_query

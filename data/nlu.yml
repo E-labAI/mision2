@@ -1,0 +1,149 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - Hola
+    - hola
+    - buenos días
+    - buenas tardes
+    - Buenos días
+    - Buenas tardes 
+    - Saludo
+    - saludo
+    - buenas noches
+    - Buenas noches
+    - Ole
+
+- intent: goodbye
+  examples: |
+    - chao
+    - bueno por
+    - hasta luego
+    - que tengas un buen día
+    - adiós
+    - nos vemos
+
+- intent: affirm
+  examples: |
+    - sí
+    - Si
+    - por supuesto
+    - Claro
+    - Suena bien
+    - Correcto
+
+- intent: deny
+  examples: |
+    - no
+    - nunca
+    - no me gusta
+    - de ninguna manera
+    - en realidad no
+    - jamás
+
+- intent: mood_great
+  examples: |
+    - perfecto
+    - genial
+    - increíble
+    - sentirse como un rey
+    - maravilloso
+    - Me siento muy bien
+    - Estoy genial
+    - Soy increíble
+    - super
+    - super contento
+    - extremadamente bien
+    - tan perfecto
+    - bueno
+    - bien
+
+- intent: mood_unhappy
+  examples: |
+    - mi día fue horrible
+    - estoy triste
+    - No me siento muy bien 
+    - Estoy decepcionado
+    - super triste
+    - estoy muy triste
+    - triste
+    - muy triste
+    - infeliz
+    - no bien
+    - no muy bien
+    - extremadamente triste
+    - tan triste
+
+- intent: bot_challenge
+  examples: |
+    - eres un bot?
+    - eres un humano?
+    - estoy hablando con un bot?
+    - estoy hablando con un humano?
+
+- intent: availability_user_query
+  examples: |
+    - hay disponibilidad para el fin de semana?
+    - hay disponibilidad para Semana Santa?
+    - tienen el apartamento para el fin de semana?
+    - tienen la habitación para el fin de semana?
+    - quiero una habitación para hoy
+    - quiero un apartamento para hoy
+    - hay disponidad para [months_name]?
+
+- intent: pricing_user_query
+  examples: |
+    - cuanto cuesta el alojamiento?
+    - cuanto cuesta el hospedaje en el apartamento?
+    - cuanto cuesta el hospedaje en la habitacion?
+    - valor del apartamento
+    - valor de la habitacion 
+    - cuanto vale el hospedaje
+
+- intent: booking_user_query
+  examples: |
+    - quiero reservar para [date]
+    - quiero reservar para [days]
+
+- intent: location_user_query
+  examples: |
+    - donde queda?
+    - en que lugar estan ubicados?
+    - como se llega?
+    - me regala la direccion
+
+- intent: loging_user_query
+  examples: |
+    - a que hora puedo llegar?
+    - horario de llegada
+    - hora de ingreso
+    - hora de salida 
+
+- intent: modification_user_query
+  examples: |
+    - puedo modificar la reserva?
+    - necesito modificar la reserva
+    - quiero cambiar la fecha
+    - no puedo ir, requiero cambiar la fecha
+    - voy a modificar los dias
+
+- intent: cancellation_user_query
+  examples: |
+    - puedo cancelar la reserva?
+    - no puedo ir, necesito cancelar la reserva?
+    - voy a cancelar el alojamiento
+
+- intent: payment_user_query
+  examples: |
+    - como cancelo la reserva?
+    - como hago para pagar?
+    - quiero pagar
+
+- intent: amenities_user_query
+  examples: |
+    - que ofrece el hospedaje?
+    - que servicio tienen?
+    - que incluye el hospedaje?
+    - que incluye el alojamiento?
+

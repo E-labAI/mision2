@@ -1,0 +1,83 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: availability inquiry
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: availability_user_query
+  - action: utter_availability_user_query
+
+- story: pricing inquiry
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: pricing_user_query
+  - action: utter_pricing_user_query
+
+- story: booking process
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: booking_user_query
+  - action: utter_booking_user_query
+  - intent: affirm
+  - action: utter_happy
+
+- story: location inquiry
+  steps:
+  - intent: location_user_query
+  - action: utter_location_user_query
+
+- story: modification request
+  steps:
+  - intent: modification_user_query
+  - action: utter_modification_user_query
+
+- story: cancellation process
+  steps:
+  - intent: cancellation_user_query
+  - action: utter_cancellation_user_query
+
+- story: payment inquiry
+  steps:
+  - intent: payment_user_query
+  - action: utter_payment_user_query
+
+- story: amenities inquiry
+  steps:
+  - intent: amenities_user_query
+  - action: utter_amenities_user_query
+
+- story: check-in/out times inquiry
+  steps:
+  - intent: loging_user_query
+  - action: utter_loging_user_query
