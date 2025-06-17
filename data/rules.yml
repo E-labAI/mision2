@@ -56,3 +56,8 @@ rules:
   steps:
   - intent: amenities_user_query
   - action: utter_amenities_user_query
+
+- rule: Respuesta por defecto
+  steps:
+  - intent: nlu_fallback
+  - action: action_default_fallback

@@ -1,6 +1,7 @@
 version: "3.1"
 
 intents:
+  - nlu_fallback
   - greet
   - goodbye
   - affirm
@@ -28,6 +29,7 @@ actions:
   - action_provide_payment_info
   - action_list_amenities
   - action_provide_check_in_out_info
+  - action_default_fallback
 
 responses:
   utter_greet:
@@ -74,6 +76,9 @@ responses:
 
   utter_amenities_user_query:
   - text: "Con el hospedaje proporcionamos los linos para uso en nuestras instalaciones y Wifi. Contamos con hidropiscina con tratamiento salino, sauna, zona de recreación y kiosco con cocina, exclusivos para nuestros huéspedes. Además, puedes pasar por las zonas verdes y visitar los pozos naturales de la quebrada Samacá, aledaños a la cabaña."
+
+  utter_default:
+  - text: "Lo siento, no entendí eso. ¿Puedes repetirlo de otra forma?"
 
 session_config:
   session_expiration_time: 60

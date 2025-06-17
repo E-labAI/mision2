@@ -11,8 +11,11 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import UserUtteranceReverted
 from datetime import datetime
 import random
+import os
+import openpyxl
 
 
 class ActionCheckAvailability(Action):
@@ -176,4 +179,31 @@ class ActionProvideCheckInOutInfo(Action):
         """
         dispatcher.utter_message(text=check_info)
         
-        return []
+        return []   
+
+class ActionDefaultFallback(Action):
+    def name(self):
+        return "action_default_fallback"
+
+    async def run(self, dispatcher: CollectingDispatcher, tracker, domain):
+        user_message = tracker.latest_message.get('text')
+        # Ruta del archivo Excel
+        file_path = "preguntas_no_entendidas.xlsx"
+
+        # Si el archivo no existe, se crea con encabezado
+        if not os.path.exists(file_path):
+            workbook = openpyxl.Workbook()
+            sheet = workbook.active
+            sheet.title = "Preguntas"
+            sheet['A1'] = "Pregunta del Usuario"
+            workbook.save(file_path)
+
+        # Abre y escribe la pregunta
+        workbook = openpyxl.load_workbook(file_path)
+        sheet = workbook.active
+        next_row = sheet.max_row + 1
+        sheet.cell(row=next_row, column=1, value=user_message)
+        workbook.save(file_path)
+
+        dispatcher.utter_message(text="No entendí bien eso. ¿Podrías reformularlo?")
+        return [UserUtteranceReverted()]

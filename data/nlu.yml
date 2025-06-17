@@ -18,11 +18,12 @@ nlu:
 - intent: goodbye
   examples: |
     - chao
-    - bueno por
     - hasta luego
     - que tengas un buen día
     - adiós
     - nos vemos
+    - hasta Pronto
+    - nos hablamos luego
 
 - intent: affirm
   examples: |
